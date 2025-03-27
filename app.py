@@ -55,18 +55,18 @@ else :
    
 with st.sidebar:
       st.subheader("Procesamiento de cámara")
-      filtro = st.radio("Filtro para imagen con cámara",('Sí', 'No'))
+      filtro = st.radio("Filtro de imagen para cámara",('Sí', 'No'))
 
-bg_image = st.file_uploader("Cargar Imagen:", type=["png", "jpg"])
+bg_image = st.file_uploader("Subir imagen:", type=["png", "jpg"])
 if bg_image is not None:
     uploaded_file=bg_image
-    st.image(uploaded_file, caption='Imagen cargada.', use_column_width=True)
+    st.image(uploaded_file, caption='Imagen subida.', use_column_width=True)
     
     # Guardar la imagen en el sistema de archivos
     with open(uploaded_file.name, 'wb') as f:
         f.write(uploaded_file.read())
     
-    st.success(f"Imagen guardada como {uploaded_file.name}")
+    st.success(f"Imagen almacenada como {uploaded_file.name}")
     img_cv = cv2.imread(f'{uploaded_file.name}')
     img_rgb = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
     text= pytesseract.image_to_string(img_rgb)

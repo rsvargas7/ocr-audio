@@ -43,18 +43,18 @@ remove_files(7)
 
 
 
-st.title("Reconocimiento Óptico de Caracteres")
-st.subheader("Elige la fuente de la imágen, esta puede venir de la cámara o cargando un archivo")
+st.title("Escaneo de texto.")
+st.subheader("Selecciona el origen de la imagen, ya sea desde la cámara o subiendo un archivo.")
 
-cam_ = st.checkbox("Usar Cámara")
+cam_ = st.checkbox("Utilizar cámara")
 
 if cam_ :
-   img_file_buffer = st.camera_input("Toma una Foto")
+   img_file_buffer = st.camera_input("Captura una foto")
 else :
    img_file_buffer = None
    
 with st.sidebar:
-      st.subheader("Procesamiento para Cámara")
+      st.subheader("Procesamiento de cámara")
       filtro = st.radio("Filtro para imagen con cámara",('Sí', 'No'))
 
 bg_image = st.file_uploader("Cargar Imagen:", type=["png", "jpg"])

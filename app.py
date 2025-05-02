@@ -43,21 +43,21 @@ remove_files(7)
 
 
 
-st.title("Escaneo de texto.")
-st.subheader("Selecciona el origen de la imagen, ya sea desde la cámara o subiendo un archivo.")
+st.title("Reconocimiento de texto")
+st.subheader("Elige el origen de la imagen, ya sea capturando con la cámara o subiendo un archivo.")
 
-cam_ = st.checkbox("Utilizar cámara")
+cam_ = st.checkbox("Usar la cámara")
 
 if cam_ :
-   img_file_buffer = st.camera_input("Captura una foto")
+   img_file_buffer = st.camera_input("Toma una foto")
 else :
    img_file_buffer = None
    
 with st.sidebar:
-      st.subheader("Procesamiento de cámara")
-      filtro = st.radio("Filtro de imagen para cámara",('Sí', 'No'))
+      st.subheader("Tratamiento de imagen de la cámara")
+      filtro = st.radio("Filtro fotográfico para cámara",('Sí', 'No'))
 
-bg_image = st.file_uploader("Subir imagen:", type=["png", "jpg"])
+bg_image = st.file_uploader("Cargar imagen:", type=["png", "jpg"])
 if bg_image is not None:
     uploaded_file=bg_image
     st.image(uploaded_file, caption='Imagen subida.', use_column_width=True)
@@ -66,7 +66,7 @@ if bg_image is not None:
     with open(uploaded_file.name, 'wb') as f:
         f.write(uploaded_file.read())
     
-    st.success(f"Imagen almacenada como {uploaded_file.name}")
+    st.success(f"Imagen guardada como {uploaded_file.name}")
     img_cv = cv2.imread(f'{uploaded_file.name}')
     img_rgb = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
     text= pytesseract.image_to_string(img_rgb)
@@ -90,7 +90,7 @@ if img_file_buffer is not None:
     st.write(text) 
 
 with st.sidebar:
-      st.subheader("Parámetros de traducción")
+      st.subheader("Ajustes de traducción")
       
       try:
           os.mkdir("temp")
@@ -101,7 +101,7 @@ with st.sidebar:
       
       #text = st.text_input("Enter text")
       in_lang = st.selectbox(
-          "Seleccione el lenguaje de entrada",
+          "Elija el idioma de entrada",
           ("Ingles", "Español", "Bengali", "koreano", "Mandarin", "Japones"),
       )
       if in_lang == "Ingles":
@@ -118,7 +118,7 @@ with st.sidebar:
           input_language = "ja"
       
       out_lang = st.selectbox(
-          "Select your output language",
+          "Choose your output language",
           ("Ingles", "Español", "Bengali", "koreano", "Mandarin", "Japones"),
       )
       if out_lang == "Ingles":
@@ -135,7 +135,7 @@ with st.sidebar:
           output_language = "ja"
       
       english_accent = st.selectbox(
-          "Seleccione el acento",
+          "Elija el acento",
           (
               "Default",
               "India",
